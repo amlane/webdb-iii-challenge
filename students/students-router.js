@@ -43,7 +43,7 @@ router.put('/:id', verifyId, (req, res) => {
     const id = req.params.id;
     const changes = req.body;
     const { studentName, cohort_id } = req.body;
-    
+
     if(!studentName || !cohort_id){
         res.status(400).json({ message: "Student Name and Cohort ID is required." })
     } else {
@@ -62,8 +62,7 @@ router.delete('/:id', verifyId, (req, res) => {
 
     Students.remove(id)
     .then(deletedStudent => {
-        const unit = deletedStudent > 1 ? "records" : "record";
-        res.status(200).json({ message: `${deletedStudent} ${unit} deleted.` });
+        res.status(200).json({ message: `Student expelled! Oh noooo!` });
     })
     .catch(err => {
         res.status(500).json(err)

@@ -62,8 +62,7 @@ router.delete('/:id', verifyId, (req, res) => {
 
     Cohorts.remove(id)
     .then(deletedCohort => {
-        const unit = deletedCohort > 1 ? "records" : "record";
-        res.status(200).json({ message: `${deletedCohort} ${unit} deleted.` });
+        res.status(200).json({ message: `Item deleted! Huzzah!` });
     })
     .catch(err => {
         res.status(500).json(err)
