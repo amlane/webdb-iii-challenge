@@ -43,13 +43,18 @@ router.put('/:id', verifyId, (req, res) => {
     const id = req.params.id;
     const changes = req.body;
 
-    Cohorts.update(id, changes)
-    .then(updatedCohort => {
-        res.status(201).json(updatedCohort)
-    })
-    .catch(err => {
-        res.status(500).json(err)
-    })
+    const { name } = req.body;
+    if(!name){
+        res.status(400).json({ message: "Cohort Name is required" })
+    } else {
+        Cohorts.update(id, changes)
+        .then(updatedCohort => {
+            res.status(201).json(updatedCohort)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
+    }
 });
 
 router.delete('/:id', verifyId, (req, res) => {

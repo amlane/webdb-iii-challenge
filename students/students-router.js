@@ -28,28 +28,33 @@ router.post('/', (req, res) => {
     const { studentName, cohort_id } = req.body;
     if(!studentName || !cohort_id){
         res.status(400).json({ message: "Student Name and Cohort ID is required." })
+    } else {
+        Students.insert(req.body)
+        .then(student => {
+            res.status(201).json(student)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
     }
-
-    Students.insert(req.body)
-    .then(student => {
-        res.status(201).json(student)
-    })
-    .catch(err => {
-        res.status(500).json(err)
-    })
 });
 
 router.put('/:id', verifyId, (req, res) => {
     const id = req.params.id;
     const changes = req.body;
-
-    Students.update(id, changes)
+    const { studentName, cohort_id } = req.body;
+    
+    if(!studentName || !cohort_id){
+        res.status(400).json({ message: "Student Name and Cohort ID is required." })
+    } else {
+        Students.update(id, changes)
     .then(updatedStudent => {
         res.status(201).json(updatedStudent)
     })
     .catch(err => {
         res.status(500).json(err)
     })
+    } 
 });
 
 router.delete('/:id', verifyId, (req, res) => {
