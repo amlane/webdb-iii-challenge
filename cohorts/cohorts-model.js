@@ -43,6 +43,6 @@ function remove(id) {
 function findStudentsByCohort(cohortId){
     return db('students')
     .join('cohorts', 'cohorts.id', 'students.cohort_id')
-    .select('students.id', 'students.studentName', 'cohorts.name as Cohort')
+    .select('students.id', 'students.studentName', 'cohorts.name as cohort')
     .where('students.cohort_id', cohortId)
 }
