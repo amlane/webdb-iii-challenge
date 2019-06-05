@@ -69,7 +69,7 @@ router.delete('/:id', verifyId, (req, res) => {
     })
 });
 
-router.get('/:id/students', (req, res) => {
+router.get('/:id/students', verifyId, (req, res) => {
     const id = req.params.id;
 
     Cohorts.findStudentsByCohort(id)
