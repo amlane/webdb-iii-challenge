@@ -10,6 +10,7 @@ exports.up = function(knex, Promise) {
 
         // foreign key
         tbl.integer('cohort_id')
+        .notNullable()
         .unsigned()
         .references('id')
         .inTable('cohorts')

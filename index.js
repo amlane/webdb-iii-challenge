@@ -9,7 +9,7 @@ const server = express();
 server.use(express.json());
 server.use(helmet());
 server.use('/api/cohorts', cohortsRouter);
-server.use('/api/students', studentsRouter);
+server.use('/students', studentsRouter);
 
 server.get('/', (req, res) => {
     res.send('Hello')
