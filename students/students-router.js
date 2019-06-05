@@ -25,6 +25,11 @@ router.get('/:id', verifyId, (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    const { studentName, cohort_id } = req.body;
+    if(!studentName || !cohort_id){
+        res.status(400).json({ message: "Student Name and Cohort ID is required." })
+    }
+
     Students.insert(req.body)
     .then(student => {
         res.status(201).json(student)

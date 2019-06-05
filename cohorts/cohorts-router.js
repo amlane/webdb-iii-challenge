@@ -25,13 +25,18 @@ router.get('/:id', verifyId, (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    Cohorts.insert(req.body)
+    const { name } = req.body;
+    if(!name){
+        res.status(400).json({ message: "Cohort Name is required" })
+    } else {
+        Cohorts.insert(req.body)
     .then(cohort => {
         res.status(201).json(cohort)
     })
     .catch(err => {
         res.status(500).json(err)
     })
+    }
 });
 
 router.put('/:id', verifyId, (req, res) => {
